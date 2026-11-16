@@ -1,11 +1,11 @@
 
-# # 03 · Integration with scVI — uterus, mesenchymal lineage
+# # 03 · Integration with scVI — uterus, all lineages
 # 
-# Subset of the uterus integration restricted to cells annotated as **mesenchymal** in `uterus_02_annotation.ipynb`.
+# Integration of all annotated uterus cells (all lineages).
 # 
 # **Pipeline:**
-# 1. Load `obs_annotation_uterus.csv` → extract mesenchymal barcodes
-# 2. For each uterus h5ad: load → subset to mesenchymal barcodes → save to a dedicated temp folder
+# 1. Load `concatenated_annotations_postnatal_v2.csv` → extract valid uterus barcodes (drop QC-fail labels and excluded cells)
+# 2. For each uterus h5ad: load → subset to valid barcodes → save to a dedicated temp folder
 # 3. Concatenate subsetted files on-disk: `join='outer'` (union of genes) and `join='inner'` (shared genes)
 # 4. Inner concat → HVGs stratified by menstrual stage (`seurat_v3`) → scVI (`Dataset` batch, `Donor_id` covariate)
 # 5. Transfer `X_scVI` to outer concat → KNN → UMAP → Leiden
